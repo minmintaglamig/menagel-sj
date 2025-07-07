@@ -1,0 +1,331 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: #6d2323;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 15px;
+  z-index: 1000;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.header .logo {
+  display: flex;
+  align-items: center;
+  max-width: 100px;
+  margin-left: 5px;
+}
+
+.header .logo img {
+  width: 40px;
+  height: auto;
+}
+
+.menu-btn {
+  font-size: 30px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 1002;
+  margin-left: 5px;
+}
+
+.company-name {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  margin-left: -20px;
+}
+
+.logout-btn {
+  background: none;
+  color: white;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+  text-decoration: none;
+  font-size: 20px;
+  margin-right: 20px;
+}
+
+.logout-btn i {
+  font-size: 20px;
+}
+
+.logout-btn:hover {
+  background: #a31d1d;
+  color: white;
+}
+
+.modal {
+  display: none; /* hide on page load */
+  position: fixed;
+  z-index: 2000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.modal-content button {
+  padding: 8px 16px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.modal-content button:first-child {
+  background-color: #d9534f;
+  color: white;
+}
+
+.modal-content button:last-child {
+  background-color: #ccc;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.notification-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.notification-btn {
+  position: relative;
+  font-size: 24px;
+  color: white; /* ✅ make bell white */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.notification-btn i {
+  color: white; /* ✅ make sure inner icon stays white */
+}
+
+.notification-count {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+.notification-dropdown {
+  position: fixed;
+  top: 40px;
+  right: 0;
+  width: 350px; /* default desktop */
+  background: white;
+  color: black;
+  border: 1px solid #7a1111;
+  border-radius: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1000;
+  animation: fadeIn 0.3s;
+  padding: 10px;
+}
+
+.notification-item {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  word-wrap: break-word;
+  white-space: normal;
+  background-color: #ffb3b3; /* light red for new notifications by default */
+  color: black;
+}
+
+/* If the notification is already read */
+.notification-read {
+  background-color: white; /* white background for read notifications */
+  color: black;
+}
+
+.notification-item:hover {
+  background-color: #e9c0c0; /* soft red on hover */
+}
+
+.notification-clicked {
+  animation: fadeOut 0.5s forwards;
+}
+
+/* Mark All Read button */
+.mark-all-read-btn {
+  background-color: #A31D1D;
+  color: white;
+  padding: 8px 16px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.mark-all-read-btn:hover {
+  background-color: #bb3d3d;
+}
+
+/* "No notifications" message style */
+.no-notifications {
+  text-align: center;
+  color: #888;
+  padding: 20px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.95); }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    padding: 10px 15px;
+  }
+
+  .menu-btn {
+    display: block;
+    font-size: 30px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    margin-left: 0;
+    z-index: 1001;
+  }
+
+  .header .logo {
+    display: none !important;
+  }
+
+  .company-name {
+    font-size: 14px;
+    margin-left: 0;
+  }
+
+  .notification-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .logout-btn {
+    font-size: 18px;
+    padding: 5px;
+    margin-left: 10px;
+  }
+
+  .logout-btn i {
+    font-size: 20px;
+  }
+
+  .notification-icon {
+    font-size: 22px;
+    margin-right: 10px;
+  }
+
+  .notification-dropdown {
+    width: 90vw;
+    left: 70%;
+    transform: translateX(-70%);
+    right: auto;
+    max-width: 400px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 10px 10px;
+  }
+
+  .menu-btn {
+    font-size: 28px;
+  }
+
+  .company-name {
+    font-size: 12px; 
+  }
+
+  .logout-btn {
+    font-size: 16px;
+    padding: 5px;
+  }
+
+  .logout-btn i {
+    font-size: 18px;
+  }
+
+  .notification-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* ✅ ensure spacing */
+  }
+  
+  .notification-btn {
+    font-size: 22px;
+    color: white;
+  }  
+
+  .notification-dropdown {
+    width: 90vw;
+    left: 70%;
+    transform: translateX(-70%);
+    right: auto;
+    max-width: 350px;
+    padding: 10px;
+  }
+  
+}

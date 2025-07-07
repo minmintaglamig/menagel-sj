@@ -1,0 +1,39 @@
+.ticket-action-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #FEF9E1;
+    width: 200px;
+}
+
+.ticket-action-form label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.ticket-action-form input,
+.ticket-action-form select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.ticket-action-form button {
+    background-color: #6D2323;
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.ticket-action-form button:hover {
+    background-color: #ad3a3a;
+}

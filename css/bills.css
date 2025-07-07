@@ -1,0 +1,152 @@
+body, h2, p {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 80%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.table-container {
+    max-width: 100%;  /* Ensure the container is responsive */
+    overflow-x: auto;  /* Allow horizontal scrolling if necessary on small screens */
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;  /* Ensure the table fills the container width */
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #D84040;
+    color: white;
+}
+
+td {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) td {
+    background-color: #f9f9f9;
+}
+
+.error-message {
+    background-color: #ffdddd;
+    color: #d8000c;
+    border: 1px solid #d8000c;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.print-button {
+    position: fixed;
+    bottom: 20px;
+    right: 80px;
+    padding: 10px 20px;
+    background-color: #D84040;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.print-button:hover {
+    background-color: #a83737;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    /* Allow overflow-x (horizontal scrolling) on smaller screens */
+    .table-container {
+        overflow-x: auto !important;  /* Allow horizontal scrolling */
+        padding: 0 !important;        /* Remove padding */
+        margin: 0 !important;         /* Remove any margins */
+    }
+
+    table {
+        width: 100% !important;  /* Ensure full width on small screens */
+    }
+
+    th, td {
+        font-size: 14px !important;  /* Reduce font size for mobile */
+        padding: 8px !important;    /* Reduce padding for better fit */
+    }
+
+    .print-button {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+}
+
+/* Larger screen styles (larger than 768px) */
+@media (min-width: 769px) {
+    /* Remove all unnecessary margins or padding */
+    .table-container {
+        padding-left: 0 !important;  /* Remove left padding */
+        margin-left: 0 !important;   /* Remove left margin */
+        width: 100% !important;      /* Ensure it takes full width */
+        overflow-x: hidden !important; /* Prevent horizontal scrolling */
+    }
+
+    table {
+        width: 100% !important;      /* Ensure table is 100% width */
+        table-layout: fixed !important; /* Avoid table stretching */
+        padding-left: 0 !important;
+        margin-left: 5px !important;
+    }
+
+    th, td {
+        font-size: 14px !important;  /* Reduce font size for mobile */
+        padding: 8px !important;    /* Reduce padding for better fit */
+    }
+
+    
+}
+
+/* Print-specific styles */
+@media print {
+    /* Hide the header and sidebar during printing */
+    header, .main-container, .sidebar, .print-button {
+        display: none !important;
+    }
+
+    /* Make sure the table takes up the full page */
+    .container {
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Ensure the table fits well on the printed page */
+    table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+    }
+
+    th, td {
+        padding: 8px !important;
+        font-size: 12px !important;
+    }
+}

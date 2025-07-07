@@ -1,0 +1,107 @@
+.dashboard-grid {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 20px !important;
+}
+
+.dashboard-left,
+.dashboard-right {
+  flex: 1 !important;
+  background-color: #fff !important;
+  padding: 20px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.dashboard-section {
+  padding: 20px !important;
+  margin-bottom: 20px !important;
+  background-color: #f9f9f9 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  box-sizing: border-box;
+  width: 100% !important;
+}
+
+/* Mobile and tablet styles */
+@media (max-width: 768px) {
+  /* Ensure the sections take up the full screen width */
+  .dashboard-grid {
+    flex-direction: column !important;  /* Stack items vertically */
+    align-items: center !important;  /* Center the stacked sections */
+    width: 100% !important;
+    padding: 20px !important;  /* Add some padding for spacing */
+    margin: 0 auto !important;
+    box-sizing: border-box;
+  }
+
+  /* Both the left and right sections should take full width */
+  .dashboard-left,
+  .dashboard-right {
+    width: 100% !important;  /* Full width on mobile */
+    margin-bottom: 20px !important;  /* Space between sections */
+  }
+
+  .dashboard-right {
+    margin-bottom: 0 !important; /* No bottom margin for the last section */
+  }
+
+  /* Remove form containers and make the content fit full width */
+  .dashboard-section {
+    padding: 0 !important;  /* Remove extra padding to prevent it from being too cramped */
+    margin: 0 !important;    /* Remove any extra margins */
+    width: 100% !important;  /* Ensure sections fill the width */
+    max-width: 100% !important;  /* Prevent overflow */
+  }
+
+  /* Remove container for Upcoming Appointments and make it larger */
+  #custom-calendar {
+    width: 100% !important;  /* Full width */
+    padding: 0 !important;  /* Remove unnecessary padding */
+    margin: 0 !important;   /* Remove any unnecessary margin */
+    box-sizing: border-box;
+  }
+
+  #calendar-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 20px !important;
+    padding: 0 10px !important;  /* Add small padding to the header */
+  }
+
+  #calendar-body {
+    max-height: none !important;  /* Remove max-height to allow full display */
+    overflow: auto !important;  /* Allow scrolling if needed */
+    width: 100% !important;      /* Full width */
+  }
+
+  /* Remove unnecessary form container for Announcements */
+  .client-announcement {
+    width: 100% !important;  /* Full width */
+    padding: 0 !important;   /* No padding to avoid cramping */
+    margin: 0 !important;    /* Remove any margins */
+    box-sizing: border-box;
+  }
+
+  .client-announcement ul {
+    list-style-type: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .client-announcement li {
+    padding: 10px 0 !important;
+    border-bottom: 1px solid #ddd !important;
+  }
+
+  /* Style the links inside announcements */
+  .client-announcement a {
+    color: #6D2323 !important;
+    text-decoration: none !important;
+  }
+
+  .client-announcement a:hover {
+    text-decoration: underline !important;
+  }
+}

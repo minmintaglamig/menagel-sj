@@ -1,0 +1,222 @@
+.application-container {
+  display: grid; 
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 20px; 
+  justify-items: center;
+  margin-top: 20px;
+}
+
+.ticket-container {
+  display: grid; 
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 20px;
+  justify-items: center;
+  margin-top: 20px;
+}
+
+.application-card {
+  width: 190px;
+  height: auto;
+  background: #6d2323;
+  border-radius: 15px;
+  box-shadow: 1px 5px 60px 0px #100a;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column; 
+  justify-content: flex-start; 
+  padding: 15px;
+}
+
+.application-card .card-border-top {
+  width: 60%;
+  height: 3%;
+  background: #e5d0ac;
+  margin: auto;
+  border-radius: 0px 0px 15px 15px;
+}
+
+.application-card .ID.number {
+  font-size: 12px;
+  text-align: center;
+  padding-top: 10px;
+  font-weight: bold;
+  color: white;
+}
+
+.application-card span {
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  display: block;
+  padding-top: 10px;
+  font-size: 16px;
+}
+
+.application-card .address {
+  font-weight: 400;
+  color: white;
+  display: block;
+  text-align: center;
+  padding-top: 3px;
+  font-size: 12px;
+}
+
+.application-card button {
+  padding: 8px 25px;
+  display: block;
+  margin: auto;
+  border-radius: 8px;
+  border: none;
+  margin-top: 30px;
+  background: #a31d1d;
+  color: white;
+  font-weight: 600;
+}
+
+.application-card button:hover {
+  background: #bf3131;
+}
+
+.application-card:hover {
+  transform: scale(1.05);
+}
+
+.application-card-link,
+.ticket-card-link {
+  display: block;
+  text-decoration: none; 
+}
+
+.application-card, .ticket-card {
+  position: relative;
+  z-index: 1;
+}
+
+.application-card-link:hover .application-card,
+.ticket-card-link:hover .ticket-card {
+  transform: scale(1.05); 
+}
+
+.ticket-card {
+  width: 190px;
+  height: auto; 
+  background: #6d2323;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 20px;
+  margin: 15px;
+  transition: transform 0.3s ease-in-out;
+  padding: 15px;
+}
+
+.ticket-card:hover {
+  transform: scale(1.05);
+}
+
+.ticket-card h2 {
+  z-index: 1;
+  color: white;
+  font-size: 1.5em;
+  margin: 0;
+  text-align: center;
+}
+
+.ticket-card p {
+  color: white;
+  z-index: 1;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.ticket-card::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 130%;
+  transition: all 0.2s linear;
+}
+
+@keyframes rotBGimg {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ticket-card::after {
+  content: "";
+  position: absolute;
+  background: #A62C2C;
+  inset: 5px;
+  border-radius: 15px;
+}
+
+.summary-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.summary-card {
+  flex: 1 1 200px;
+  background-color: #f9f9f9;
+  border-left: 5px solid #A62C2C;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.summary-card h3 {
+  margin: 0;
+  font-size: 2em;
+  color: #333;
+}
+
+.summary-card p {
+  margin: 5px 0 0;
+  font-size: 1em;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .application-container,
+  .ticket-container {
+    display: block; 
+    justify-content: flex-start; 
+  }
+
+  .application-card,
+  .ticket-card {
+    width: 100%;
+    margin-bottom: 20px; 
+  }
+
+  .application-card,
+  .ticket-card {
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .application-container,
+  .ticket-container {
+    display: block;
+  }
+
+  .application-card,
+  .ticket-card {
+    width: 100%; 
+    height: auto; 
+    margin-bottom: 15px;
+  }
+}

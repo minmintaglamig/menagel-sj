@@ -1,0 +1,1185 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 08, 2025 at 06:13 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `wifi`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_reset_tokens`
+--
+
+CREATE TABLE `password_reset_tokens` (
+  `id` int(11) NOT NULL,
+  `email` text NOT NULL,
+  `reset_token` varchar(255) NOT NULL,
+  `reset_expires` datetime NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblactivity_logs`
+--
+
+CREATE TABLE `tblactivity_logs` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `role` varchar(50) DEFAULT NULL,
+  `action` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblactivity_logs`
+--
+
+INSERT INTO `tblactivity_logs` (`id`, `user_id`, `role`, `action`, `created_at`) VALUES
+(1, 67, 'client', '👤 Example Akooo updated profile information.', '2025-04-30 18:27:23'),
+(2, 61, 'client', '📩 Mira Flor Godilo submitted a new ticket.', '2025-05-02 11:39:28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbladmin_notifications`
+--
+
+CREATE TABLE `tbladmin_notifications` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `is_read` tinyint(1) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `redirect_url` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbladmin_notifications`
+--
+
+INSERT INTO `tbladmin_notifications` (`id`, `user_id`, `message`, `is_read`, `created_at`, `redirect_url`) VALUES
+(1, NULL, '🎫 New ticket submitted!', 0, '2025-04-30 17:01:29', ''),
+(2, 64, '🎫 New ticket submitted!', 0, '2025-05-02 11:39:28', ''),
+(3, 64, '💳 Billing reminder: Client payment is due soon!', 0, '2025-05-08 16:10:50', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbladvertisement`
+--
+
+CREATE TABLE `tbladvertisement` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `is_visible` tinyint(1) DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbladvertisement`
+--
+
+INSERT INTO `tbladvertisement` (`id`, `title`, `content`, `image`, `is_visible`, `created_at`) VALUES
+(7, 'ADS 1', '!!!!!!!!!', '1745419527_1743861726_ads1.png', 1, '2025-04-23 14:45:27'),
+(8, 'ADS 2', 'hays', '1745419571_1743861747_ads2.jpg', 1, '2025-04-23 14:45:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblannouncements`
+--
+
+CREATE TABLE `tblannouncements` (
+  `id` int(11) NOT NULL,
+  `company_name` varchar(255) NOT NULL,
+  `announcement_text` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `announcement_image` varchar(255) DEFAULT NULL,
+  `is_visible` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblannouncements`
+--
+
+INSERT INTO `tblannouncements` (`id`, `company_name`, `announcement_text`, `created_at`, `announcement_image`, `is_visible`) VALUES
+(3, 'Menagel SJ', 'helloooo!', '2025-02-20 12:01:09', '1743095588__Demure cat with glasses and sharkie _ Everything is on fire_ Sticker for Sale by FigmaCreations.jpg', 1),
+(8, '', 'DEFENSE NAAAAA ><', '2025-04-11 02:41:41', '1745420273_1743095519_download.jpg', 1),
+(15, '', 'aefafaf', '2025-05-02 15:01:21', '1746198081_857b7f4ecc1c7a88b917d850bbdeb974.jpg', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblanswers`
+--
+
+CREATE TABLE `tblanswers` (
+  `id` int(11) NOT NULL,
+  `faq_id` int(11) NOT NULL,
+  `answer` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblanswers`
+--
+
+INSERT INTO `tblanswers` (`id`, `faq_id`, `answer`) VALUES
+(1, 1, 'On the landing page, click the \"Apply Now\" button in the navigation bar. Fill out the form completely to submit your application.'),
+(2, 2, 'Click the \"Sign Up\" button on the landing page. Provide your email address and create a secure password.'),
+(3, 2, 'After signing up, confirm your email through the verification link sent to your inbox.'),
+(4, 3, 'Yes, all your submitted data is encrypted and stored securely following AES-256 encryption standards.'),
+(5, 3, 'We also implement strict access control and regular security audits to protect user information.'),
+(6, 4, 'Check if multiple devices are connected and using bandwidth-heavy apps like streaming or downloads.'),
+(7, 4, 'Restart your router and make sure it\'s placed in a central location with minimal obstruction.'),
+(8, 5, 'Ensure that the email or mobile number you used is correct and has signal or internet access.'),
+(9, 5, 'Contact support to ensure your account is not blocked or restricted.'),
+(10, 6, 'Make sure the router is plugged in correctly and the cables are not damaged.'),
+(11, 6, 'Try restarting the router and check if the indicator lights are working.'),
+(12, 6, 'If the issue persists, reset the router to factory settings or contact technical support.'),
+(13, 7, 'Go to Tickets > Select \"Upgrade/Downgrade Internet\" in Concern Type > Request an upgrade from the admin.'),
+(14, 8, 'Yes. Go to Tickets > Select \"Upgrade/Downgrade Internet\" in Concern Type > Request a downgrade from the admin.'),
+(15, 8, 'Contact support if the downgrade option is not available.'),
+(52, 18, 'You may have an unpaid bill. Check your payment history.'),
+(53, 18, 'It could be scheduled maintenance or a network issue in your area.'),
+(54, 19, 'Settle unpaid balances and restart your modem.'),
+(55, 19, 'Contact support to request manual reconnection.'),
+(56, 20, 'Tap “Forgot Password” on the login screen and follow the instructions.'),
+(57, 21, 'Go to Profile > Change Number.'),
+(58, 21, 'If you no longer have access to the old number, contact support.'),
+(59, 22, 'We post advisories during maintenance. Please check our official pages.'),
+(60, 22, 'Try again after a few minutes if the issue persists.'),
+(61, 23, 'You can contact us through the phone number, Facebook page, or business location listed in the Contact Us section on the landing page.'),
+(62, 24, 'The terms and conditions are available at the bottom of the landing page.'),
+(63, 25, 'You can leave feedback before logging out—just click the \"Logout\" button and fill out the feedback form.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblapplication`
+--
+
+CREATE TABLE `tblapplication` (
+  `id` int(11) NOT NULL,
+  `fname` text NOT NULL,
+  `mname` text NOT NULL,
+  `lname` text NOT NULL,
+  `address` text NOT NULL,
+  `residenttype` enum('Owner','Rental') NOT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `billing_proof` varchar(255) NOT NULL,
+  `valid_id` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `email` varchar(255) NOT NULL,
+  `promo_id` int(11) NOT NULL,
+  `promo_name` varchar(255) DEFAULT NULL,
+  `status` enum('Pending','Approved') NOT NULL DEFAULT 'Pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblapplication`
+--
+
+INSERT INTO `tblapplication` (`id`, `fname`, `mname`, `lname`, `address`, `residenttype`, `mobile`, `billing_proof`, `valid_id`, `created_at`, `email`, `promo_id`, `promo_name`, `status`) VALUES
+(69, 'NllRUW1za3hnMjl2UVgzNjZ5WmxLUT09', 'SGxpU0lMTmVZSGt5M1hMdHAzUVdjQT09', 'QW1RS0J0L0JrUWlYR2dXbkRJY0RQQT09', 'NzlPcVFkZ0Ixdko3dktxOGFhbWJWbEgxZXRkbmp4enRtQ1JGV0RIblR2UHBzRnZ5blpncXNuRkRudkdIMkt6dw==', 'Rental', 'UDVGT210eC9sSG9HbjlLYXpyQ0tUZz09', '../uploads/billing_proof/2022-09-07.png', '../uploads/valid_id/2022-09-13 (2).png', '2025-04-20 15:59:06', 'V09UK1dxbFphSUlYelJJSTdpcC9sbU1ReVh1ZVZkVEU1M2JqUXhnNnh4dz0=', 1, 'Unli Plan 800', 'Approved'),
+(73, 'ZEUrSlk5VmNDL1hyR3IyblZjVTBVUT09', 'T3FMZk8wYksrcXNBMVgwaGQ0WVE1UT09', 'QzEyb1Mxb29FRERLbDg5N2hYWkhkUT09', 'bnRZQUZwSFVXWnBjS1EwZDFzV3FmSmd0Wk1kY2o0dzg0RWlURDBLT2pmMncxZnJSOEFmU1RuRjN3VWNYeVN5Ng==', 'Rental', 'SzBXK2t3SFRuaStqSEpJdG1KMW5Rdz09', '../uploads/billing_proof/images (1).jpg', '../uploads/valid_id/hrochlogo.png', '2025-04-22 04:50:04', 'SDRlQm1CbG5vd0FVYVBhVEdpSlhYOUlaSEZSRi9ERk5YdDEyVi9jUkdWdz0=', 1, 'Unli Plan 800', 'Approved'),
+(76, 'SGxpU0lMTmVZSGt5M1hMdHAzUVdjQT09', 'L0J1cnBxZTNKVEJCbnB6NzdPNXVOZz09', 'NllRUW1za3hnMjl2UVgzNjZ5WmxLUT09', 'WTIyYWVlVlBNUzhpNmVyOUhvYnhHTEJUMzlGa1F3MTZSTEduQnFXVVlsUFEyeWZMZzJZTDVJU2cxa0cxMnlESw==', 'Rental', 'L2FSQ2FNbWxzWWhqSzRuSWFtNWNKdz09', '../uploads/billing_proof/file_1150592.png', '../uploads/valid_id/transparent_image.png', '2025-04-30 16:09:03', 'VFZUSEttWStKNW96UjdySnpTYU5yMzdxSER4ZlVYdVFZNmVKb0oyL2srRT0=', 2, 'Unli Plan 1000', 'Approved');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblapprove`
+--
+
+CREATE TABLE `tblapprove` (
+  `id` int(11) NOT NULL,
+  `application_id` int(11) NOT NULL,
+  `staff_id` int(11) NOT NULL,
+  `approval_status` enum('Pending','Approved','Rejected') DEFAULT 'Pending',
+  `scheduled_date` date DEFAULT NULL,
+  `scheduled_time` time DEFAULT NULL,
+  `approved_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `client_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblapprove`
+--
+
+INSERT INTO `tblapprove` (`id`, `application_id`, `staff_id`, `approval_status`, `scheduled_date`, `scheduled_time`, `approved_at`, `client_id`) VALUES
+(39, 69, 22, 'Approved', '2025-05-09', '22:42:00', '2025-05-02 11:37:05', 57),
+(40, 73, 22, 'Approved', '2025-05-12', '22:42:00', '2025-05-02 11:37:19', 61);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblbilling`
+--
+
+CREATE TABLE `tblbilling` (
+  `billing_id` int(11) NOT NULL,
+  `routernumber` varchar(50) NOT NULL,
+  `promo_id` int(11) NOT NULL,
+  `amount_due` decimal(10,2) NOT NULL,
+  `due_date` date NOT NULL,
+  `status` enum('Unpaid','Paid') DEFAULT 'Unpaid'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblbilling`
+--
+
+INSERT INTO `tblbilling` (`billing_id`, `routernumber`, `promo_id`, `amount_due`, `due_date`, `status`) VALUES
+(67, 'VWJqWG9uYXRHQ1J4Z3RielM5aUxiUT09', 1, 800.00, '2025-06-02', 'Unpaid'),
+(68, 'Z1lNUmJ0ZVl0MXFYOXdIMnpuYkp5dz09', 1, 800.00, '2025-06-08', 'Unpaid');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblbilling_archive`
+--
+
+CREATE TABLE `tblbilling_archive` (
+  `billing_id` int(11) NOT NULL,
+  `routernumber` varchar(50) NOT NULL,
+  `promo_id` int(11) NOT NULL,
+  `amount_due` decimal(10,2) NOT NULL,
+  `due_date` date NOT NULL,
+  `status` enum('Unpaid','Paid') DEFAULT 'Unpaid'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblclientlist`
+--
+
+CREATE TABLE `tblclientlist` (
+  `client_id` int(11) NOT NULL,
+  `routernumber` varchar(50) DEFAULT NULL,
+  `fname` text NOT NULL,
+  `mname` text NOT NULL,
+  `lname` text NOT NULL,
+  `address` text NOT NULL,
+  `residenttype` enum('Owner','Rental') NOT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `promo_name` varchar(255) DEFAULT NULL,
+  `status` enum('Installed','Pending') DEFAULT 'Pending',
+  `email` varchar(255) NOT NULL,
+  `promo_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblclientlist`
+--
+
+INSERT INTO `tblclientlist` (`client_id`, `routernumber`, `fname`, `mname`, `lname`, `address`, `residenttype`, `mobile`, `promo_name`, `status`, `email`, `promo_id`) VALUES
+(57, 'VWJqWG9uYXRHQ1J4Z3RielM5aUxiUT09', 'NllRUW1za3hnMjl2UVgzNjZ5WmxLUT09', 'MmEzcXcvWTkvU3JqYzdFWlF2NWd4N3JtcHp1NCttOHlhVHhwQy9rcTM5MD0=', 'dHhKcitHRExXNEwzOXVDeU5TaGpqQT09', 'NzlPcVFkZ0Ixdko3dktxOGFhbWJWbEgxZXRkbmp4enRtQ1JGV0RIblR2UHBzRnZ5blpncXNuRkRudkdIMkt6dw==', 'Rental', 'UDVGT210eC9sSG9HbjlLYXpyQ0tUZz09', 'Unli Plan 800', 'Installed', 'V09UK1dxbFphSUlYelJJSTdpcC9sbU1ReVh1ZVZkVEU1M2JqUXhnNnh4dz0=', 1),
+(61, 'Z1lNUmJ0ZVl0MXFYOXdIMnpuYkp5dz09', 'ZEUrSlk5VmNDL1hyR3IyblZjVTBVUT09', 'OFh1UHFMa0hwRHlJZDluZUVpNU41Zz09', 'QzEyb1Mxb29FRERLbDg5N2hYWkhkUT09', 'bnRZQUZwSFVXWnBjS1EwZDFzV3FmSmd0Wk1kY2o0dzg0RWlURDBLT2pmMncxZnJSOEFmU1RuRjN3VWNYeVN5Ng==', 'Rental', 'SzBXK2t3SFRuaStqSEpJdG1KMW5Rdz09', '', 'Installed', 'SDRlQm1CbG5vd0FVYVBhVEdpSlhYOUlaSEZSRi9ERk5YdDEyVi9jUkdWdz0=', 1),
+(64, NULL, 'SGxpU0lMTmVZSGt5M1hMdHAzUVdjQT09', 'L0J1cnBxZTNKVEJCbnB6NzdPNXVOZz09', 'NllRUW1za3hnMjl2UVgzNjZ5WmxLUT09', 'WTIyYWVlVlBNUzhpNmVyOUhvYnhHTEJUMzlGa1F3MTZSTEduQnFXVVlsUFEyeWZMZzJZTDVJU2cxa0cxMnlESw==', 'Rental', 'L2FSQ2FNbWxzWWhqSzRuSWFtNWNKdz09', 'Unli Plan 1000', 'Installed', 'VFZUSEttWStKNW96UjdySnpTYU5yMzdxSER4ZlVYdVFZNmVKb0oyL2srRT0=', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblclient_archive`
+--
+
+CREATE TABLE `tblclient_archive` (
+  `client_id` int(11) NOT NULL,
+  `routernumber` varchar(50) DEFAULT NULL,
+  `fname` text NOT NULL,
+  `mname` text NOT NULL,
+  `lname` text NOT NULL,
+  `address` text NOT NULL,
+  `residenttype` enum('Owner','Rental') NOT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `promo_name` varchar(255) DEFAULT NULL,
+  `status` enum('Installed','Pending') DEFAULT 'Pending',
+  `email` varchar(255) NOT NULL,
+  `promo_id` int(11) NOT NULL,
+  `install_date` date DEFAULT NULL,
+  `drop_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblclient_notifications`
+--
+
+CREATE TABLE `tblclient_notifications` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `is_read` tinyint(1) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `redirect_url` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblclient_notifications`
+--
+
+INSERT INTO `tblclient_notifications` (`id`, `user_id`, `message`, `is_read`, `created_at`, `redirect_url`) VALUES
+(1, 67, '📢 New announcement posted!', 1, '2025-04-28 01:07:19', NULL),
+(2, 68, '📢 New announcement posted!', 0, '2025-04-28 01:07:19', NULL),
+(3, 73, '📢 New announcement posted!', 0, '2025-04-28 01:07:19', NULL),
+(4, 67, '📢 New announcement posted!', 1, '2025-04-28 01:27:39', NULL),
+(5, 68, '📢 New announcement posted!', 0, '2025-04-28 01:27:39', NULL),
+(6, 73, '📢 New announcement posted!', 0, '2025-04-28 01:27:39', NULL),
+(7, NULL, '📢 New announcement posted!', 0, '2025-04-29 06:35:44', NULL),
+(8, NULL, '📢 New announcement posted!', 0, '2025-04-29 06:35:44', NULL),
+(9, NULL, '📢 New announcement posted!', 0, '2025-04-29 06:35:44', NULL),
+(10, NULL, '📢 New announcement posted!', 0, '2025-04-29 06:41:11', ''),
+(11, NULL, '📢 New announcement posted!', 0, '2025-04-29 06:41:11', ''),
+(12, NULL, '📢 New announcement posted!', 0, '2025-04-29 06:41:11', ''),
+(13, 67, '📢 New announcement posted!', 1, '2025-04-29 06:55:02', ''),
+(14, 68, '📢 New announcement posted!', 0, '2025-04-29 06:55:02', ''),
+(15, 73, '📢 New announcement posted!', 0, '2025-04-29 06:55:02', ''),
+(16, NULL, '🎫 Your ticket has been scheduled!', 0, '2025-04-30 17:01:29', ''),
+(17, 67, '📢 New announcement posted!', 0, '2025-05-02 15:01:22', ''),
+(18, 68, '📢 New announcement posted!', 0, '2025-05-02 15:01:22', ''),
+(19, 73, '📢 New announcement posted!', 0, '2025-05-02 15:01:22', ''),
+(20, 78, '📢 New announcement posted!', 0, '2025-05-02 15:01:22', ''),
+(21, 61, '💳 Billing reminder: Your payment is due soon!', 0, '2025-05-08 16:10:50', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblfaqcategories`
+--
+
+CREATE TABLE `tblfaqcategories` (
+  `id` int(11) NOT NULL,
+  `category_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblfaqcategories`
+--
+
+INSERT INTO `tblfaqcategories` (`id`, `category_name`) VALUES
+(1, 'Application'),
+(2, 'Technical'),
+(3, 'Upgrade/Downgrade'),
+(4, 'Disconnection'),
+(5, 'Account'),
+(6, 'System'),
+(7, 'Others');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblfeedbacks`
+--
+
+CREATE TABLE `tblfeedbacks` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `role` varchar(50) DEFAULT NULL,
+  `rating` int(11) NOT NULL,
+  `comment` text DEFAULT NULL,
+  `submitted_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblinstallations`
+--
+
+CREATE TABLE `tblinstallations` (
+  `installation_id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `status` enum('Pending','Installed') DEFAULT 'Pending',
+  `install_date` date DEFAULT NULL,
+  `client_name` varchar(255) NOT NULL,
+  `proof_photo` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblinstallations`
+--
+
+INSERT INTO `tblinstallations` (`installation_id`, `client_id`, `status`, `install_date`, `client_name`, `proof_photo`) VALUES
+(30, 57, 'Installed', '2025-05-02', '', 'install_6814ac972f724.jpg'),
+(31, 61, 'Installed', '2025-05-02', '', 'install_6814acce543f5.jpg'),
+(32, 64, 'Installed', '2025-05-02', '', 'install_6814ada3e1ea5.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblpayment`
+--
+
+CREATE TABLE `tblpayment` (
+  `payment_id` int(11) NOT NULL,
+  `routernumber` varchar(50) NOT NULL,
+  `payment_date` date NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `updated_by_admin` tinyint(1) DEFAULT 0,
+  `amount_paid` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `payment_method` varchar(50) NOT NULL DEFAULT 'Unknown',
+  `billing_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblpayment_archive`
+--
+
+CREATE TABLE `tblpayment_archive` (
+  `payment_id` int(11) NOT NULL,
+  `routernumber` varchar(50) NOT NULL,
+  `payment_date` date NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `updated_by_admin` tinyint(1) DEFAULT 0,
+  `amount_paid` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `payment_method` varchar(50) NOT NULL DEFAULT 'Unknown',
+  `billing_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblpromo`
+--
+
+CREATE TABLE `tblpromo` (
+  `promo_id` int(11) NOT NULL,
+  `promo_name` varchar(255) NOT NULL,
+  `speed` varchar(50) NOT NULL,
+  `amount` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblpromo`
+--
+
+INSERT INTO `tblpromo` (`promo_id`, `promo_name`, `speed`, `amount`) VALUES
+(1, 'Unli Plan 800', 'Up to 20 Mbps', 800.00),
+(2, 'Unli Plan 1000', 'Up to 40 Mbps', 1000.00),
+(3, 'Unli Plan 1500', 'Up to 70 Mbps', 1500.00),
+(4, 'Unli Plan 2000', 'Up to 100 Mbps', 2000.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblpromo_subscribers`
+--
+
+CREATE TABLE `tblpromo_subscribers` (
+  `id` int(11) NOT NULL,
+  `promo_id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `fname` text NOT NULL,
+  `mname` text DEFAULT NULL,
+  `lname` text NOT NULL,
+  `email` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblpromo_subscribers`
+--
+
+INSERT INTO `tblpromo_subscribers` (`id`, `promo_id`, `client_id`, `fname`, `mname`, `lname`, `email`) VALUES
+(48, 1, 57, 'NllRUW1za3hnMjl2UVgzNjZ5WmxLUT09', 'SGxpU0lMTmVZSGt5M1hMdHAzUVdjQT09', 'QW1RS0J0L0JrUWlYR2dXbkRJY0RQQT09', 'V09UK1dxbFphSUlYelJJSTdpcC9sbU1ReVh1ZVZkVEU1M2JqUXhnNnh4dz0='),
+(52, 1, 61, 'ZEUrSlk5VmNDL1hyR3IyblZjVTBVUT09', 'T3FMZk8wYksrcXNBMVgwaGQ0WVE1UT09', 'QzEyb1Mxb29FRERLbDg5N2hYWkhkUT09', 'SDRlQm1CbG5vd0FVYVBhVEdpSlhYOUlaSEZSRi9ERk5YdDEyVi9jUkdWdz0='),
+(55, 2, 64, 'SGxpU0lMTmVZSGt5M1hMdHAzUVdjQT09', 'L0J1cnBxZTNKVEJCbnB6NzdPNXVOZz09', 'NllRUW1za3hnMjl2UVgzNjZ5WmxLUT09', 'VFZUSEttWStKNW96UjdySnpTYU5yMzdxSER4ZlVYdVFZNmVKb0oyL2srRT0='),
+(56, 1, 61, 'ZEUrSlk5VmNDL1hyR3IyblZjVTBVUT09', 'OFh1UHFMa0hwRHlJZDluZUVpNU41Zz09', 'QzEyb1Mxb29FRERLbDg5N2hYWkhkUT09', 'SDRlQm1CbG5vd0FVYVBhVEdpSlhYOUlaSEZSRi9ERk5YdDEyVi9jUkdWdz0=');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblquestions`
+--
+
+CREATE TABLE `tblquestions` (
+  `id` int(11) NOT NULL,
+  `question` text NOT NULL,
+  `category_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblquestions`
+--
+
+INSERT INTO `tblquestions` (`id`, `question`, `category_id`) VALUES
+(1, 'How to apply?', 1),
+(2, 'How to create an account?', 1),
+(3, 'Is my input data secured?', 1),
+(4, 'Why is my Wi-Fi internet connection slow?', 2),
+(5, 'I can\'t receive verification codes. What should I do?', 2),
+(6, 'Why is my router not working properly?', 2),
+(7, 'How can I upgrade my account?', 3),
+(8, 'Can I downgrade my plan?', 3),
+(18, 'Why was my internet disconnected?', 4),
+(19, 'How can I reconnect my service?', 4),
+(20, 'What should I do if I forgot my password?', 5),
+(21, 'How do I change my registered mobile number?', 5),
+(22, 'Is the system down?', 6),
+(23, 'How can I contact customer support?', 7),
+(24, 'Where can I find the terms and conditions?', 7),
+(25, 'Where can I leave feedback?', 7);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblstafflist`
+--
+
+CREATE TABLE `tblstafflist` (
+  `id` int(11) NOT NULL,
+  `fname` text NOT NULL,
+  `mname` text NOT NULL,
+  `lname` text NOT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `address` text NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `specialization` enum('Technical','Upgrade/Downgrade Internet','Disconnection','Other') NOT NULL,
+  `status` enum('Active','Inactive') DEFAULT 'Active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblstafflist`
+--
+
+INSERT INTO `tblstafflist` (`id`, `fname`, `mname`, `lname`, `mobile`, `address`, `email`, `specialization`, `status`) VALUES
+(21, 'RldwUUlvWlFGK0krWEtNODV2VDFpdz09', 'WjcwV0trbS9hYTFoS0t1WERwV0NUUT09', 'NllRUW1za3hnMjl2UVgzNjZ5WmxLUT09', '09324923407', 'YzJnODNJTDhGbFlqcVYzOTRJZk9NUT09', 'ZEhKcVI3eW4vTmNnOURPMFVoM1pURytjSHM4alFiZ2JPOGxBZElnRTBwST0=', 'Other', 'Inactive'),
+(22, 'R0s1c2JrUHlQM2lPdHFkenNEb0RRdz09', 'OFh1UHFMa0hwRHlJZDluZUVpNU41Zz09', 'eVdiakR0akwwYjFpcUNRQldvaG41UT09', 'T3FMZk8wYksrcXNBMVgwaGQ0WVE1UT09', 'dHgwZS9xcjNDUGJPRzJwc2ZsMjRuUT09', 'eTQ5TG5CTVNGSml2ZXFzVG9RUGF1dz09', 'Disconnection', 'Inactive');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblstaff_notifications`
+--
+
+CREATE TABLE `tblstaff_notifications` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `is_read` tinyint(1) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `redirect_url` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblstaff_notifications`
+--
+
+INSERT INTO `tblstaff_notifications` (`id`, `user_id`, `message`, `is_read`, `created_at`, `redirect_url`) VALUES
+(1, 71, '📢 New announcement posted!', 1, '2025-04-28 01:07:19', NULL),
+(2, 74, '📢 New announcement posted!', 0, '2025-04-28 01:07:19', NULL),
+(3, 71, '📢 New announcement posted!', 1, '2025-04-28 01:27:39', NULL),
+(4, 74, '📢 New announcement posted!', 0, '2025-04-28 01:27:39', NULL),
+(5, NULL, '📢 New announcement posted!', 0, '2025-04-29 06:35:44', NULL),
+(6, NULL, '📢 New announcement posted!', 0, '2025-04-29 06:35:44', NULL),
+(7, NULL, '📢 New announcement posted!', 0, '2025-04-29 06:41:11', ''),
+(8, NULL, '📢 New announcement posted!', 0, '2025-04-29 06:41:11', ''),
+(9, 71, '📢 New announcement posted!', 0, '2025-04-29 06:55:02', ''),
+(10, 74, '📢 New announcement posted!', 0, '2025-04-29 06:55:02', ''),
+(11, NULL, '🎫 New ticket assigned!', 0, '2025-04-30 17:01:29', ''),
+(12, 76, '📢 New announcement posted!', 0, '2025-05-02 15:01:22', ''),
+(13, 77, '📢 New announcement posted!', 0, '2025-05-02 15:01:22', ''),
+(14, 76, '💳 Billing reminder: Client payment is due soon!', 0, '2025-05-08 16:10:50', ''),
+(15, 77, '💳 Billing reminder: Client payment is due soon!', 0, '2025-05-08 16:10:50', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblstaff_schedule`
+--
+
+CREATE TABLE `tblstaff_schedule` (
+  `id` int(11) NOT NULL,
+  `staff_id` int(11) DEFAULT NULL,
+  `day_of_week` enum('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday') DEFAULT NULL,
+  `time_from` time DEFAULT NULL,
+  `time_to` time DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblstaff_schedule`
+--
+
+INSERT INTO `tblstaff_schedule` (`id`, `staff_id`, `day_of_week`, `time_from`, `time_to`) VALUES
+(1, 21, 'Tuesday', '07:00:00', '19:00:00'),
+(2, 21, 'Thursday', '07:00:00', '19:00:00'),
+(3, 21, 'Saturday', '07:00:00', '19:00:00'),
+(4, 22, 'Monday', '08:00:00', '20:00:00'),
+(5, 22, 'Wednesday', '08:00:00', '20:00:00'),
+(6, 22, 'Friday', '08:00:00', '20:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbltickets`
+--
+
+CREATE TABLE `tbltickets` (
+  `ticket_id` int(11) NOT NULL,
+  `fname` text NOT NULL,
+  `mname` text DEFAULT NULL,
+  `lname` text NOT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `address` text NOT NULL,
+  `routernumber` varchar(50) NOT NULL,
+  `concern_type` enum('Technical','Upgrade/Downgrade Internet','Disconnection','Other') NOT NULL,
+  `concern` text NOT NULL,
+  `status` enum('Pending','Scheduled','Completed') DEFAULT 'Pending',
+  `schedule_date` date DEFAULT NULL,
+  `schedule_time` time DEFAULT NULL,
+  `assigned_staff` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `image` varchar(255) DEFAULT NULL,
+  `proof_photo` varchar(255) DEFAULT NULL,
+  `completed_date` date DEFAULT NULL,
+  `completed_time` time DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbltickets`
+--
+
+INSERT INTO `tbltickets` (`ticket_id`, `fname`, `mname`, `lname`, `mobile`, `address`, `routernumber`, `concern_type`, `concern`, `status`, `schedule_date`, `schedule_time`, `assigned_staff`, `created_at`, `image`, `proof_photo`, `completed_date`, `completed_time`) VALUES
+(27, 'NllRUW1za3hnMjl2UVgzNjZ5WmxLUT09', 'SGxpU0lMTmVZSGt5M1hMdHAzUVdjQT09', 'QW1RS0J0L0JrUWlYR2dXbkRJY0RQQT09', 'UDVGT210eC9sSG9HbjlLYXpyQ0tUZz09', 'NzlPcVFkZ0Ixdko3dktxOGFhbWJWbEgxZXRkbmp4enRtQ1JGV0RIblR2UHBzRnZ5blpncXNuRkRudkdIMkt6dw==', 'VWJqWG9uYXRHQ1J4Z3RielM5aUxiUT09', 'Disconnection', 'ajZycE0xOGJjV0JqYjM1YWkvSENGZz09', 'Pending', NULL, NULL, NULL, '2025-04-23 02:50:07', '1745424036_1728948370234.jpg', NULL, NULL, NULL),
+(38, 'NllRUW1za3hnMjl2UVgzNjZ5WmxLUT09', 'SGxpU0lMTmVZSGt5M1hMdHAzUVdjQT09', 'QW1RS0J0L0JrUWlYR2dXbkRJY0RQQT09', 'UDVGT210eC9sSG9HbjlLYXpyQ0tUZz09', 'NzlPcVFkZ0Ixdko3dktxOGFhbWJWbEgxZXRkbmp4enRtQ1JGV0RIblR2UHBzRnZ5blpncXNuRkRudkdIMkt6dw==', 'VWJqWG9uYXRHQ1J4Z3RielM5aUxiUT09', 'Disconnection', 'NkdhdEFFTVpKVGdDbHcvalJJZ1BsUT09', 'Completed', '2025-05-02', '06:48:00', 22, '2025-04-27 00:23:43', '1745713440_stock-vector-hands-holding-clipboard-with-checklist-with-green-check-marks-and-pen-human-filling-control-list-1926298895-removebg-preview.png', 'uploads/ticketsproof/68125eff5c593.jpg', '2025-04-30', '19:33:51'),
+(41, 'NllRUW1za3hnMjl2UVgzNjZ5WmxLUT09', 'OFh1UHFMa0hwRHlJZDluZUVpNU41Zz09', 'dHhKcitHRExXNEwzOXVDeU5TaGpqQT09', 'UDVGT210eC9sSG9HbjlLYXpyQ0tUZz09', 'NzlPcVFkZ0Ixdko3dktxOGFhbWJWbEgxZXRkbmp4enRtQ1JGV0RIblR2UHBzRnZ5blpncXNuRkRudkdIMkt6dw==', 'VWJqWG9uYXRHQ1J4Z3RielM5aUxiUT09', 'Disconnection', 'TlJnTnJjbzdsVldmWVdDbUE3NjJKUT09', 'Completed', '2025-05-09', '17:06:00', 22, '2025-04-30 17:01:00', '1746032460_0b0f4664eb7446760ba4b294b1014e7f-removebg-preview.png', NULL, '2025-04-30', '19:01:33'),
+(42, 'ZEUrSlk5VmNDL1hyR3IyblZjVTBVUT09', 'OFh1UHFMa0hwRHlJZDluZUVpNU41Zz09', 'QzEyb1Mxb29FRERLbDg5N2hYWkhkUT09', 'SzBXK2t3SFRuaStqSEpJdG1KMW5Rdz09', 'bnRZQUZwSFVXWnBjS1EwZDFzV3FmSmd0Wk1kY2o0dzg0RWlURDBLT2pmMncxZnJSOEFmU1RuRjN3VWNYeVN5Ng==', 'Z1lNUmJ0ZVl0MXFYOXdIMnpuYkp5dz09', 'Other', 'VkhqZ0dESFZlN3R2dWVwTnkyOUxBZz09', 'Pending', NULL, NULL, NULL, '2025-05-02 11:39:28', '', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblticket_replies`
+--
+
+CREATE TABLE `tblticket_replies` (
+  `reply_id` int(11) NOT NULL,
+  `ticket_id` int(11) NOT NULL,
+  `sender` enum('admin','client') NOT NULL,
+  `message` text NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblticket_replies`
+--
+
+INSERT INTO `tblticket_replies` (`reply_id`, `ticket_id`, `sender`, `message`, `created_at`) VALUES
+(1, 27, 'admin', 'try', '2025-05-02 16:05:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblusers`
+--
+
+CREATE TABLE `tblusers` (
+  `id` int(11) NOT NULL,
+  `email` text NOT NULL,
+  `password` text NOT NULL,
+  `role` enum('Admin','Staff','Client') NOT NULL DEFAULT 'Client',
+  `created_at` date NOT NULL DEFAULT current_timestamp(),
+  `verify_code` varchar(6) NOT NULL,
+  `is_verified` tinyint(1) DEFAULT 0,
+  `is_disabled_by_admin` tinyint(1) DEFAULT 0,
+  `is_active` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblusers`
+--
+
+INSERT INTO `tblusers` (`id`, `email`, `password`, `role`, `created_at`, `verify_code`, `is_verified`, `is_disabled_by_admin`, `is_active`) VALUES
+(64, 'Vk9RQ000Y21vR3FiM203ME8wcVZPVGt0d3FRUXlGQjcwMEJYUXkraytKZz0=', '$2y$10$9iEH2tsBl0d4m2QdhZZ/j.JDgKWI5KXza9c31.f1tF/NNWv.Sn61K', 'Admin', '2025-04-20', '', 0, 0, 0),
+(67, 'V09UK1dxbFphSUlYelJJSTdpcC9sbU1ReVh1ZVZkVEU1M2JqUXhnNnh4dz0=', '$2y$10$FK4BtsxH.8mxCmsFR1x8IOknB8wGC7FR7zeGyoZ6OGXnWHS3iH8uy', 'Client', '2025-04-20', '', 1, 0, 0),
+(68, 'SDRlQm1CbG5vd0FVYVBhVEdpSlhYOUlaSEZSRi9ERk5YdDEyVi9jUkdWdz0=', '$2y$10$PjTIG9.jrw5d2Mx6RDGMHeenhdEWAwf0qfjZOsZlEO8NPWQpTEZd.', 'Client', '2025-04-22', '', 1, 0, 0),
+(73, 'cTZ0Sk8vRC9NbmR6RW5YSUlnM3lrSFdHNHp3NmNtVFRJV2FoSFdnOThiMD0=', '$2y$10$tDt5ak.BLKp3c1o/zSfOB.hbA53DJIIY9PM299lFjQAhI5Wqhu7YC', 'Client', '2025-04-26', '', 1, 0, 0),
+(76, 'ZEhKcVI3eW4vTmNnOURPMFVoM1pURytjSHM4alFiZ2JPOGxBZElnRTBwST0=', '$2y$10$rL8KgKa5bYogm/j42bXf8eWiKScYfhtg1XfSI26nQzxN0uaHeIkV6', 'Staff', '2025-04-30', '', 1, 1, 1),
+(77, 'eTQ5TG5CTVNGSml2ZXFzVG9RUGF1dz09', '$2y$10$rKUJ/4UxlsV6MTp/vViIR.xIumCISpczwsE72T9LxJzVYMo5ajeWC', 'Staff', '2025-04-30', '', 1, 0, 1),
+(78, 'VFZUSEttWStKNW96UjdySnpTYU5yMzdxSER4ZlVYdVFZNmVKb0oyL2srRT0=', '$2y$10$j8W3F8oAFKt.BKlTLHuK7.7PzPZa4/W/H5xX8nsUXFVo3n525xRoe', 'Client', '2025-05-01', '', 1, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblverifications`
+--
+
+CREATE TABLE `tblverifications` (
+  `id` int(11) NOT NULL,
+  `email` text NOT NULL,
+  `password` text NOT NULL,
+  `role` varchar(50) NOT NULL,
+  `verify_code` varchar(6) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tblactivity_logs`
+--
+ALTER TABLE `tblactivity_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbladmin_notifications`
+--
+ALTER TABLE `tbladmin_notifications`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbladvertisement`
+--
+ALTER TABLE `tbladvertisement`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tblannouncements`
+--
+ALTER TABLE `tblannouncements`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tblanswers`
+--
+ALTER TABLE `tblanswers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `faq_id` (`faq_id`);
+
+--
+-- Indexes for table `tblapplication`
+--
+ALTER TABLE `tblapplication`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_application_promo` (`promo_id`);
+
+--
+-- Indexes for table `tblapprove`
+--
+ALTER TABLE `tblapprove`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `application_id` (`application_id`),
+  ADD KEY `staff_id` (`staff_id`);
+
+--
+-- Indexes for table `tblbilling`
+--
+ALTER TABLE `tblbilling`
+  ADD PRIMARY KEY (`billing_id`),
+  ADD KEY `promo_id` (`promo_id`),
+  ADD KEY `routernumber` (`routernumber`);
+
+--
+-- Indexes for table `tblbilling_archive`
+--
+ALTER TABLE `tblbilling_archive`
+  ADD PRIMARY KEY (`billing_id`),
+  ADD KEY `promo_id` (`promo_id`),
+  ADD KEY `routernumber` (`routernumber`);
+
+--
+-- Indexes for table `tblclientlist`
+--
+ALTER TABLE `tblclientlist`
+  ADD PRIMARY KEY (`client_id`),
+  ADD UNIQUE KEY `routernumber` (`routernumber`),
+  ADD KEY `fk_client_promo` (`promo_id`);
+
+--
+-- Indexes for table `tblclient_archive`
+--
+ALTER TABLE `tblclient_archive`
+  ADD PRIMARY KEY (`client_id`),
+  ADD UNIQUE KEY `routernumber` (`routernumber`),
+  ADD KEY `fk_client_promo` (`promo_id`);
+
+--
+-- Indexes for table `tblclient_notifications`
+--
+ALTER TABLE `tblclient_notifications`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tblfaqcategories`
+--
+ALTER TABLE `tblfaqcategories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tblfeedbacks`
+--
+ALTER TABLE `tblfeedbacks`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tblinstallations`
+--
+ALTER TABLE `tblinstallations`
+  ADD PRIMARY KEY (`installation_id`),
+  ADD KEY `client_id` (`client_id`);
+
+--
+-- Indexes for table `tblpayment`
+--
+ALTER TABLE `tblpayment`
+  ADD PRIMARY KEY (`payment_id`),
+  ADD KEY `routernumber` (`routernumber`),
+  ADD KEY `fk_billing` (`billing_id`);
+
+--
+-- Indexes for table `tblpayment_archive`
+--
+ALTER TABLE `tblpayment_archive`
+  ADD PRIMARY KEY (`payment_id`),
+  ADD KEY `routernumber` (`routernumber`),
+  ADD KEY `fk_billing` (`billing_id`);
+
+--
+-- Indexes for table `tblpromo`
+--
+ALTER TABLE `tblpromo`
+  ADD PRIMARY KEY (`promo_id`),
+  ADD UNIQUE KEY `promo_name` (`promo_name`);
+
+--
+-- Indexes for table `tblpromo_subscribers`
+--
+ALTER TABLE `tblpromo_subscribers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `promo_id` (`promo_id`),
+  ADD KEY `client_id` (`client_id`);
+
+--
+-- Indexes for table `tblquestions`
+--
+ALTER TABLE `tblquestions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_category` (`category_id`);
+
+--
+-- Indexes for table `tblstafflist`
+--
+ALTER TABLE `tblstafflist`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `tblstaff_notifications`
+--
+ALTER TABLE `tblstaff_notifications`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tblstaff_schedule`
+--
+ALTER TABLE `tblstaff_schedule`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `staff_id` (`staff_id`);
+
+--
+-- Indexes for table `tbltickets`
+--
+ALTER TABLE `tbltickets`
+  ADD PRIMARY KEY (`ticket_id`);
+
+--
+-- Indexes for table `tblticket_replies`
+--
+ALTER TABLE `tblticket_replies`
+  ADD PRIMARY KEY (`reply_id`),
+  ADD KEY `ticket_id` (`ticket_id`);
+
+--
+-- Indexes for table `tblusers`
+--
+ALTER TABLE `tblusers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`) USING HASH,
+  ADD UNIQUE KEY `email_2` (`email`) USING HASH;
+
+--
+-- Indexes for table `tblverifications`
+--
+ALTER TABLE `tblverifications`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tblactivity_logs`
+--
+ALTER TABLE `tblactivity_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tbladmin_notifications`
+--
+ALTER TABLE `tbladmin_notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbladvertisement`
+--
+ALTER TABLE `tbladvertisement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tblannouncements`
+--
+ALTER TABLE `tblannouncements`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `tblanswers`
+--
+ALTER TABLE `tblanswers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+
+--
+-- AUTO_INCREMENT for table `tblapplication`
+--
+ALTER TABLE `tblapplication`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+
+--
+-- AUTO_INCREMENT for table `tblapprove`
+--
+ALTER TABLE `tblapprove`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT for table `tblbilling`
+--
+ALTER TABLE `tblbilling`
+  MODIFY `billing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+
+--
+-- AUTO_INCREMENT for table `tblbilling_archive`
+--
+ALTER TABLE `tblbilling_archive`
+  MODIFY `billing_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblclientlist`
+--
+ALTER TABLE `tblclientlist`
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+
+--
+-- AUTO_INCREMENT for table `tblclient_archive`
+--
+ALTER TABLE `tblclient_archive`
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+
+--
+-- AUTO_INCREMENT for table `tblclient_notifications`
+--
+ALTER TABLE `tblclient_notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `tblfaqcategories`
+--
+ALTER TABLE `tblfaqcategories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `tblfeedbacks`
+--
+ALTER TABLE `tblfeedbacks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblinstallations`
+--
+ALTER TABLE `tblinstallations`
+  MODIFY `installation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `tblpayment`
+--
+ALTER TABLE `tblpayment`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `tblpayment_archive`
+--
+ALTER TABLE `tblpayment_archive`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblpromo`
+--
+ALTER TABLE `tblpromo`
+  MODIFY `promo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tblpromo_subscribers`
+--
+ALTER TABLE `tblpromo_subscribers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
+--
+-- AUTO_INCREMENT for table `tblquestions`
+--
+ALTER TABLE `tblquestions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `tblstafflist`
+--
+ALTER TABLE `tblstafflist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `tblstaff_notifications`
+--
+ALTER TABLE `tblstaff_notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `tblstaff_schedule`
+--
+ALTER TABLE `tblstaff_schedule`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tbltickets`
+--
+ALTER TABLE `tbltickets`
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT for table `tblticket_replies`
+--
+ALTER TABLE `tblticket_replies`
+  MODIFY `reply_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tblusers`
+--
+ALTER TABLE `tblusers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+
+--
+-- AUTO_INCREMENT for table `tblverifications`
+--
+ALTER TABLE `tblverifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tblanswers`
+--
+ALTER TABLE `tblanswers`
+  ADD CONSTRAINT `tblanswers_ibfk_1` FOREIGN KEY (`faq_id`) REFERENCES `tblquestions` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `tblapplication`
+--
+ALTER TABLE `tblapplication`
+  ADD CONSTRAINT `fk_application_promo` FOREIGN KEY (`promo_id`) REFERENCES `tblpromo` (`promo_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `tblapprove`
+--
+ALTER TABLE `tblapprove`
+  ADD CONSTRAINT `tblapprove_ibfk_1` FOREIGN KEY (`application_id`) REFERENCES `tblapplication` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tblapprove_ibfk_2` FOREIGN KEY (`staff_id`) REFERENCES `tblstafflist` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `tblbilling`
+--
+ALTER TABLE `tblbilling`
+  ADD CONSTRAINT `tblbilling_ibfk_1` FOREIGN KEY (`promo_id`) REFERENCES `tblpromo` (`promo_id`),
+  ADD CONSTRAINT `tblbilling_ibfk_2` FOREIGN KEY (`routernumber`) REFERENCES `tblclientlist` (`routernumber`);
+
+--
+-- Constraints for table `tblclientlist`
+--
+ALTER TABLE `tblclientlist`
+  ADD CONSTRAINT `fk_client_promo` FOREIGN KEY (`promo_id`) REFERENCES `tblpromo` (`promo_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `tblinstallations`
+--
+ALTER TABLE `tblinstallations`
+  ADD CONSTRAINT `tblinstallations_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `tblclientlist` (`client_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `tblpayment`
+--
+ALTER TABLE `tblpayment`
+  ADD CONSTRAINT `fk_billing` FOREIGN KEY (`billing_id`) REFERENCES `tblbilling` (`billing_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tblpayment_ibfk_1` FOREIGN KEY (`routernumber`) REFERENCES `tblclientlist` (`routernumber`);
+
+--
+-- Constraints for table `tblpromo_subscribers`
+--
+ALTER TABLE `tblpromo_subscribers`
+  ADD CONSTRAINT `tblpromo_subscribers_ibfk_1` FOREIGN KEY (`promo_id`) REFERENCES `tblpromo` (`promo_id`),
+  ADD CONSTRAINT `tblpromo_subscribers_ibfk_2` FOREIGN KEY (`client_id`) REFERENCES `tblclientlist` (`client_id`);
+
+--
+-- Constraints for table `tblquestions`
+--
+ALTER TABLE `tblquestions`
+  ADD CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `tblfaqcategories` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `tblstaff_schedule`
+--
+ALTER TABLE `tblstaff_schedule`
+  ADD CONSTRAINT `tblstaff_schedule_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `tblstafflist` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `tblticket_replies`
+--
+ALTER TABLE `tblticket_replies`
+  ADD CONSTRAINT `tblticket_replies_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `tbltickets` (`ticket_id`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
